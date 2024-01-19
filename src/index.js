@@ -1,13 +1,50 @@
 import './style.css';
 
- function component() {
-   const element = document.createElement('div');
+const header = (() => {
+    const header = document.createElement('div'); 
+    header.classList.add('header'); 
 
-   // Lodash, now imported by this script
-    element.textContent = 'Hello world!';
-    element.classList.add('hello');
+    const title = document.createElement('div'); 
+    title.textContent = 'Pizzeria La Piazza'; 
+    title.classList.add('title'); 
 
-   return element;
- }
+    const menyOptions = document.createElement('ul'); 
+    const homeButton = document.createElement('li');
+    homeButton.textContent = 'Home';
+    const menuButton = document.createElement('li'); 
+    menuButton.textContent = 'Menu';
+    const contactButton = document.createElement('li'); 
+    contactButton.textContent = 'Contact';
 
- document.body.appendChild(component());
+    menyOptions.append(homeButton, menuButton, contactButton); 
+
+    header.append(title, menyOptions);
+
+    const getHeader = () => {
+        return header; 
+    }
+
+    const getHomeButton = () => {
+        return homeButton; 
+    }
+
+    const getMenuButton = () => {
+        return menuButton; 
+    }
+
+    const getContactButton = () => {
+        return contactButton;
+    }
+    
+    return { getHeader, getHomeButton, getMenuButton, getContactButton };
+})();
+
+
+const content = document.getElementById('content');
+const body = document.createElement('div');  
+const bodyContent = document.createElement('div'); 
+bodyContent.textContent = 'body content'; 
+body.appendChild(bodyContent); 
+body.classList.add('body'); 
+content.appendChild(header.getHeader()); 
+content.appendChild(body); 
