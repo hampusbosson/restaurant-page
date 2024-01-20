@@ -1,9 +1,18 @@
+//import css and other page modules: 
 import './style.css';
 import loadHomePage from './home';
 import loadMenuPage from './menu';
 import loadContactPage from './contact';
 
-const header = (() => {
+//create buttons for the header:
+function createButton(text, onClick) {
+    const button = document.createElement('li');
+    button.textContent = text;
+    button.addEventListener('click', onClick);
+    return button;
+}
+
+function createHeader() {
     const header = document.createElement('div'); 
     header.classList.add('header'); 
 
@@ -11,38 +20,18 @@ const header = (() => {
     title.textContent = 'Pizzeria La Piazza'; 
     title.classList.add('title'); 
 
-    const menyOptions = document.createElement('ul'); 
-    const homeButton = document.createElement('li');
-    homeButton.textContent = 'Home';
-    const menuButton = document.createElement('li'); 
-    menuButton.textContent = 'Menu';
-    const contactButton = document.createElement('li'); 
-    contactButton.textContent = 'Contact';
+    const menuOptions = document.createElement('ul'); 
+    menuOptions.append(
+        createButton('Home', () => loadPage(loadHomePage)),
+        createButton('Menu', () => loadPage(loadMenuPage)),
+        createButton('Contact', () => loadPage(loadContactPage))
+    ); 
 
-    menyOptions.append(homeButton, menuButton, contactButton); 
+    header.append(title, menuOptions);
+    return header;
+}
 
-    header.append(title, menyOptions);
-
-    const getHeader = () => {
-        return header; 
-    }
-
-    const getHomeButton = () => {
-        return homeButton; 
-    }
-
-    const getMenuButton = () => {
-        return menuButton; 
-    }
-
-    const getContactButton = () => {
-        return contactButton;
-    }
-    
-    return { getHeader, getHomeButton, getMenuButton, getContactButton };
-})();
-
-function footer() {
+function createFooter() {
     const footer = document.createElement('div'); 
     footer.classList.add('footer'); 
 
@@ -54,26 +43,21 @@ function footer() {
     return footer; 
 }
 
-const content = document.getElementById('content');
+//load other pages by removing the current content
+//from body and adding new content
+function loadPage(pageLoader) {
+    const body = document.querySelector('.body');
+    body.innerHTML = '';
+    body.appendChild(pageLoader());
+}
 
+//get content element and add body element: 
+const content = document.getElementById('content');
 const body = document.createElement('div');  
 body.classList.add('body'); 
-content.append(header.getHeader(), body, footer()); 
 
-const homePage = loadHomePage(); 
-body.appendChild(homePage);
+//load header, body and footer to pre-made 'content' div: 
+content.append(createHeader(), body, createFooter()); 
 
-header.getMenuButton().addEventListener('click', () => {
-    const menuContent = loadMenuPage();
-    body.appendChild(menuContent);
-});
-
-header.getHomeButton().addEventListener('click', () => {
-    const pageContent = loadHomePage();
-    body.appendChild(pageContent);
-});
-
-header.getContactButton().addEventListener('click', () => {
-    const contactContent = loadContactPage(); 
-    body.appendChild(contactContent); 
-});
+// Load home page initially
+loadPage(loadHomePage);

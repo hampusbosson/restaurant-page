@@ -1,20 +1,23 @@
 import Icon from './pizza-guy.png'; 
 
-function loadHomePage() {
-    const contentBox = document.querySelector('.body');  
-    contentBox.innerHTML = ''; 
+function createTextElement(text, className) {
+    const textElement = document.createElement('div');
+    textElement.textContent = text;
+    if (className) {
+        textElement.classList.add(className);
+    }
+    return textElement;
+}
 
+function loadHomePage() {
     const homePage = document.createElement('div');
     homePage.classList.add('homepage'); 
 
     const upperSection = document.createElement('div');
     upperSection.classList.add('upper-section');  
 
-    const upperText = document.createElement('div');
-    upperText.textContent = 'Best Pizza In Trosa';
-
-    const middleText = document.createElement('div');
-    middleText.textContent = 'Made With Passion Since 1854';
+    const upperText = createTextElement('Best Pizza In Trosa');
+    const middleText = createTextElement('Made With Passion Since 1854');
 
     upperSection.append(upperText, middleText); 
 
@@ -22,8 +25,7 @@ function loadHomePage() {
     pizzaGuyImage.src = Icon; 
     pizzaGuyImage.classList.add('image'); 
 
-    const lowerText = document.createElement('div');
-    lowerText.textContent = 'Order Online Or Visit Us!';
+    const lowerText = createTextElement('Order Online Or Visit Us!');
 
     homePage.append(upperSection, pizzaGuyImage, lowerText);
 
