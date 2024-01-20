@@ -1,4 +1,7 @@
 import './style.css';
+import loadHomePage from './home';
+import loadMenuPage from './menu';
+import loadContactPage from './contact';
 
 const header = (() => {
     const header = document.createElement('div'); 
@@ -39,12 +42,38 @@ const header = (() => {
     return { getHeader, getHomeButton, getMenuButton, getContactButton };
 })();
 
+function footer() {
+    const footer = document.createElement('div'); 
+    footer.classList.add('footer'); 
+
+    const footerText = document.createElement('div'); 
+    footerText.textContent = 'Copyright © 2023 hampusbosson';
+    footerText.classList.add('footer-text'); 
+
+    footer.appendChild(footerText); 
+    return footer; 
+}
 
 const content = document.getElementById('content');
+
 const body = document.createElement('div');  
-const bodyContent = document.createElement('div'); 
-bodyContent.textContent = 'body content'; 
-body.appendChild(bodyContent); 
 body.classList.add('body'); 
-content.appendChild(header.getHeader()); 
-content.appendChild(body); 
+content.append(header.getHeader(), body, footer()); 
+
+const homePage = loadHomePage(); 
+body.appendChild(homePage);
+
+header.getMenuButton().addEventListener('click', () => {
+    const menuContent = loadMenuPage();
+    body.appendChild(menuContent);
+});
+
+header.getHomeButton().addEventListener('click', () => {
+    const pageContent = loadHomePage();
+    body.appendChild(pageContent);
+});
+
+header.getContactButton().addEventListener('click', () => {
+    const contactContent = loadContactPage(); 
+    body.appendChild(contactContent); 
+});
