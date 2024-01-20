@@ -6,6 +6,7 @@ body {
     background-size: cover; 
     background-position: top; 
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .body {
@@ -33,8 +34,9 @@ body {
     padding-top: 3.5rem; 
 }
 
-.homepage, .menupage {
+.homepage, .menupage, .contact-page {
     width: 30em;
+    min-height: 26em;
     background-color: rgba(0, 0, 0, 0.762);
     border: 0.1em white solid; 
     border-radius: 10px;
@@ -74,6 +76,36 @@ body {
     cursor: pointer; 
     transform: scale(1.07);
     background-color: rgba(42, 42, 42, 0.573);
+}
+
+.contact-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem; 
+}
+
+.contact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em; 
+    margin-left: 6rem;
+}
+
+.footer {
+    height: 3rem; 
+    background-color: rgba(0, 0, 0, 0.663);
+    color: white; 
+    font-weight: lighter;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-image {
+    width: 70%; 
+    margin-left: 6rem; 
 }
 
 .pizza-image {
