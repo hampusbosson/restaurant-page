@@ -1,8 +1,11 @@
 import Icon from './pizza-guy.png'; 
 
 function loadHomePage() {
-    const homepage = document.createElement('div');
-    homepage.classList.add('homepage'); 
+    const contentBox = document.querySelector('.body');  
+    contentBox.innerHTML = ''; 
+
+    const homePage = document.createElement('div');
+    homePage.classList.add('homepage'); 
 
     const upperSection = document.createElement('div');
     upperSection.classList.add('upper-section');  
@@ -22,9 +25,9 @@ function loadHomePage() {
     const lowerText = document.createElement('div');
     lowerText.textContent = 'Order Online Or Visit Us!';
 
-    homepage.append(upperSection, pizzaGuyImage, lowerText);
+    homePage.append(upperSection, pizzaGuyImage, lowerText);
 
-    return homepage; 
+    return homePage; 
 }
 
-export default loadHomePage();
+export default loadHomePage;
